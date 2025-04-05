@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://c25i8oma5osog"]
+
+[ext_resource type="Script" uid="uid://w48bkc1bl4s1" path="res://rat.gd" id="1_p3nl4"]
+[ext_resource type="Texture2D" uid="uid://rpqkni108443" path="res://rat_ph.png" id="2_172ra"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pmwci"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xl1m0"]
+radius = 100.0
+
+[node name="Rat" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_p3nl4")
+max_speed = 600.0
+separation_weight = 1.5
+alignment_weight = 0.1
+cohesion_weight = 0.25
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_pmwci")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_172ra")
+
+[node name="Influence" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Influence"]
+shape = SubResource("CircleShape2D_xl1m0")
