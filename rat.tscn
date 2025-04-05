@@ -1,17 +1,74 @@
-[gd_scene load_steps=5 format=3 uid="uid://c25i8oma5osog"]
+[gd_scene load_steps=9 format=3 uid="uid://c25i8oma5osog"]
 
 [ext_resource type="Script" uid="uid://w48bkc1bl4s1" path="res://rat.gd" id="1_p3nl4"]
-[ext_resource type="Texture2D" uid="uid://rpqkni108443" path="res://rat_ph.png" id="2_172ra"]
+[ext_resource type="Texture2D" uid="uid://bmmkvyr507y53" path="res://ratwalkcycle.png" id="2_xl1m0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pmwci"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xl1m0"]
-radius = 100.0
+radius = 50.0
+
+[sub_resource type="Animation" id="Animation_p3nl4"]
+resource_name = "walk"
+length = 0.75
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_172ra"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ja7ka"]
+resource_name = "idle"
+length = 0.75
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eotln"]
+_data = {
+&"RESET": SubResource("Animation_172ra"),
+&"idle": SubResource("Animation_ja7ka"),
+&"walk": SubResource("Animation_p3nl4")
+}
 
 [node name="Rat" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1_p3nl4")
 max_speed = 600.0
+cursor_weight = 2.0
 separation_weight = 1.5
 alignment_weight = 0.1
 cohesion_weight = 0.25
@@ -22,7 +79,10 @@ shape = SubResource("CapsuleShape2D_pmwci")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_172ra")
+rotation = 1.5708
+texture = ExtResource("2_xl1m0")
+hframes = 3
+vframes = 2
 
 [node name="Influence" type="Area2D" parent="."]
 collision_layer = 0
@@ -30,3 +90,9 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Influence"]
 shape = SubResource("CircleShape2D_xl1m0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_eotln")
+}
+autoplay = "idle"
