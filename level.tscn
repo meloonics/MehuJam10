@@ -34,3 +34,15 @@ tile_set = SubResource("TileSet_f2txt")
 
 [node name="Food" parent="." instance=ExtResource("4_0b4ue")]
 position = Vector2(95, 66)
+
+[node name="Food2" parent="." instance=ExtResource("4_0b4ue")]
+position = Vector2(-33, 68)
+min_rats = 1
+
+[node name="Food3" parent="." instance=ExtResource("4_0b4ue")]
+position = Vector2(-214, -85)
+min_rats = 1
+
+[node name="Food4" parent="." instance=ExtResource("4_0b4ue")]
+position = Vector2(-219, 83)
+min_rats = 3

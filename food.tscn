@@ -1,10 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxguhkpit8p71"]
+[gd_scene load_steps=10 format=3 uid="uid://bxguhkpit8p71"]
 
 [ext_resource type="Texture2D" uid="uid://drimfv3pjm1vp" path="res://icon.svg" id="1_8txok"]
 [ext_resource type="Script" uid="uid://b8jkdw51wys6i" path="res://food.gd" id="1_pohk7"]
+[ext_resource type="FontFile" uid="uid://rvvtkwu8wxy6" path="res://Kenney Mini Square.ttf" id="3_q6vj8"]
+[ext_resource type="Texture2D" uid="uid://b6o7g0d2wdfqo" path="res://black_pixel.png" id="4_5fm71"]
+[ext_resource type="Texture2D" uid="uid://ct8l1rwjy5xsk" path="res://white_pixel.png" id="5_lu35j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q6vj8"]
 radius = 32.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_v8piq"]
+font = ExtResource("3_q6vj8")
+font_size = 12
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_kktf7"]
+font = ExtResource("3_q6vj8")
+font_size = 8
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5fm71"]
 
 [node name="Food" type="Area2D"]
 collision_layer = 4
@@ -21,6 +40,7 @@ shape = SubResource("CircleShape2D_q6vj8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 0, 1)
+texture_filter = 1
 texture = ExtResource("1_8txok")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
@@ -38,5 +58,80 @@ damping_max = 0.25
 scale_amount_min = 2.0
 scale_amount_max = 4.0
 color = Color(1, 1, 0, 1)
+
+[node name="RatCount" type="Label" parent="."]
+unique_name_in_owner = true
+z_index = 10
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = 2.0
+offset_right = 16.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "50"
+label_settings = SubResource("LabelSettings_v8piq")
+horizontal_alignment = 2
+
+[node name="ProgressBar" type="TextureProgressBar" parent="."]
+clip_children = 2
+z_index = 20
+custom_minimum_size = Vector2(32, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -24.0
+offset_right = 16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+step = 0.0
+nine_patch_stretch = true
+texture_under = ExtResource("4_5fm71")
+texture_progress = ExtResource("5_lu35j")
+
+[node name="nom" type="Label" parent="ProgressBar"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 197.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "nom
+nom
+nom
+nom
+nom
+nom
+nom
+nom
+nom
+nom
+nom
+nom
+nom
+nom
+nom
+nom"
+label_settings = SubResource("LabelSettings_kktf7")
+horizontal_alignment = 1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_5fm71")
 
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
