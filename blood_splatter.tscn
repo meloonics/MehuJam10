@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://b5fxi8repybsf"]
+
+[ext_resource type="Texture2D" uid="uid://2ff33qwuwyo5" path="res://blood.png" id="1_nd4dr"]
+[ext_resource type="Script" uid="uid://c5bomidls2c4v" path="res://blood_splatter.gd" id="2_vi1xv"]
+[ext_resource type="AudioStream" uid="uid://cng3x553matys" path="res://EEEE.mp3" id="3_lf7ar"]
+[ext_resource type="AudioStream" uid="uid://sv0couy021om" path="res://wee.mp3" id="4_7skkf"]
+[ext_resource type="AudioStream" uid="uid://c1xrenmv87sjp" path="res://AGHHH.mp3" id="5_dueh4"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_352qi"]
+streams_count = 3
+stream_0/stream = ExtResource("3_lf7ar")
+stream_1/stream = ExtResource("4_7skkf")
+stream_2/stream = ExtResource("5_dueh4")
+
+[node name="BloodSplatter" type="Sprite2D"]
+z_index = -1
+texture_filter = 1
+texture = ExtResource("1_nd4dr")
+hframes = 4
+script = ExtResource("2_vi1xv")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 28
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 215.38
+initial_velocity_max = 500.0
+scale_amount_min = 4.0
+scale_amount_max = 6.0
+color = Color(0.839216, 0, 0, 1)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_352qi")

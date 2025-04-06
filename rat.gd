@@ -15,6 +15,11 @@ var food_force : Vector2 = Vector2.ZERO
 var desire : Vector2 = Vector2.ZERO
 @onready var influence_radius = $Influence/CollisionShape2D.shape.radius
 
+var corpse_scene = preload("res://blood_splatter.tscn")
+
+func _ready() -> void:
+	Events.rat_spawned.emit()
+
 func _physics_process(delta: float) -> void:
 	desire = Vector2.ZERO
 	desire += cursor_force * cursor_weight
@@ -91,3 +96,10 @@ func set_animation_speed() -> void:
 	var current_speed = velocity.length() / max_speed
 	$AnimationPlayer.speed_scale = amin_speed + speed_range * current_speed
 	
+
+func kill() -> void:
+	var splat = corpse_scene.instantiate()
+	get_parent().add_child(splat)
+	splat.global_position = global_position
+	splat.splat()
+	queue_free()

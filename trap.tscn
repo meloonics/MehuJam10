@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://coypvcs6y65yb"]
+
+[ext_resource type="Script" uid="uid://dr4yug4211wh" path="res://trap.gd" id="1_w2pp3"]
+[ext_resource type="Texture2D" uid="uid://bvlq162g4jftj" path="res://trap.png" id="2_gix62"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bmoth"]
+size = Vector2(8, 15)
+
+[node name="Trap" type="Area2D"]
+collision_layer = 0
+monitorable = false
+script = ExtResource("1_w2pp3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_gix62")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_bmoth")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

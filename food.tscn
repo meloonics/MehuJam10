@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bxguhkpit8p71"]
 
-[ext_resource type="Texture2D" uid="uid://drimfv3pjm1vp" path="res://icon.svg" id="1_8txok"]
 [ext_resource type="Script" uid="uid://b8jkdw51wys6i" path="res://food.gd" id="1_pohk7"]
+[ext_resource type="Texture2D" uid="uid://dveoo2unep6ba" path="res://cheese-Sheet.png" id="2_5fm71"]
 [ext_resource type="FontFile" uid="uid://rvvtkwu8wxy6" path="res://Kenney Mini Square.ttf" id="3_q6vj8"]
 [ext_resource type="Texture2D" uid="uid://b6o7g0d2wdfqo" path="res://black_pixel.png" id="4_5fm71"]
 [ext_resource type="Texture2D" uid="uid://ct8l1rwjy5xsk" path="res://white_pixel.png" id="5_lu35j"]
@@ -24,6 +24,7 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5fm71"]
+radius = 8.0
 
 [node name="Food" type="Area2D"]
 collision_layer = 4
@@ -39,9 +40,9 @@ min_rats = 10
 shape = SubResource("CircleShape2D_q6vj8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 0, 1)
 texture_filter = 1
-texture = ExtResource("1_8txok")
+texture = ExtResource("2_5fm71")
+hframes = 9
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false

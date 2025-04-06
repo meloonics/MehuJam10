@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cov2mg6oe5fpn"
+path="res://.godot/imported/pickup or spike.mp3-0b47dd93aac70704c43e1e7bc13c80b7.mp3str"
+
+[deps]
+
+source_file="res://pickup or spike.mp3"
+dest_files=["res://.godot/imported/pickup or spike.mp3-0b47dd93aac70704c43e1e7bc13c80b7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

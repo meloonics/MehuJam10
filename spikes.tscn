@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cge2au7bvqa8g"]
+
+[ext_resource type="Script" uid="uid://bafkcf51tvlkg" path="res://spikes.gd" id="1_nrdsm"]
+[ext_resource type="Texture2D" uid="uid://des4734hxlncw" path="res://spikes.png" id="2_8fhau"]
+[ext_resource type="AudioStream" uid="uid://cov2mg6oe5fpn" path="res://pickup or spike.mp3" id="3_8fhau"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ds4fp"]
+
+[node name="Spikes" type="Area2D"]
+collision_layer = 0
+monitorable = false
+script = ExtResource("1_nrdsm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ds4fp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_8fhau")
+hframes = 2
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_8fhau")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

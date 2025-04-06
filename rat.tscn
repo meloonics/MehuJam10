@@ -64,7 +64,7 @@ _data = {
 &"walk": SubResource("Animation_p3nl4")
 }
 
-[node name="Rat" type="CharacterBody2D"]
+[node name="Rat" type="CharacterBody2D" groups=["rat"]]
 collision_mask = 2
 script = ExtResource("1_p3nl4")
 max_speed = 600.0

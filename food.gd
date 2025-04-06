@@ -3,9 +3,12 @@ extends Area2D
 @export_range(1, 50) var min_rats : int = 1
 
 @onready var radius : float = $CollisionShape2D.shape.radius
+var reward_scene = preload("res://reward.tscn")
 var rats_left : int
 var progress : float = 0.0
 
+func _ready() -> void:
+	$Sprite2D.frame = randi() % 9
 
 
 func _physics_process(delta: float) -> void:
@@ -54,11 +57,14 @@ func handle_progress(delta : float):
 
 func handle_shake() -> void:
 	
-	var min_shake : float = 1.0
+	var min_shake : float = 0.25
 	var max_shake : float = 3.0
-	var shake : float = lerp(min_shake, max_shake, progress)
+	var shake : float = lerp(min_shake, max_shake, progress * progress)
 	var offs = Vector2.RIGHT.rotated(randf() * TAU) * shake
 	$Sprite2D.offset = offs
 
 func reward() -> void:
+	var rew = reward_scene.instantiate()
+	get_parent().add_child(rew)
+	rew.reward(global_position, min_rats)
 	queue_free()

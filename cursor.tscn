@@ -24,6 +24,7 @@ script = ExtResource("1_fsq4c")
 shape = SubResource("CircleShape2D_fsq4c")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 z_index = 1
 texture = SubResource("GradientTexture2D_5l68f")
 

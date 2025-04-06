@@ -1,0 +1,120 @@
+[gd_scene load_steps=8 format=3 uid="uid://b4tx4tfhtna4v"]
+
+[ext_resource type="Script" uid="uid://h4ymb75llrcm" path="res://reward.gd" id="1_jggsb"]
+[ext_resource type="FontFile" uid="uid://rvvtkwu8wxy6" path="res://Kenney Mini Square.ttf" id="2_fromr"]
+[ext_resource type="AudioStream" uid="uid://bqutuh43rv2gm" path="res://retro-coin-1-236677.mp3" id="3_c42fa"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4s5vq"]
+font = ExtResource("2_fromr")
+font_size = 12
+font_color = Color(0, 1, 0, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[sub_resource type="Animation" id="Animation_qs8p3"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-17.5, -7.5), Vector2(-17.5, -86)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ljfkd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-17.5, -7.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kwuan"]
+_data = {
+&"RESET": SubResource("Animation_ljfkd"),
+&"new_animation": SubResource("Animation_qs8p3")
+}
+
+[node name="Reward" type="Node2D"]
+script = ExtResource("1_jggsb")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 25
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 120.0
+initial_velocity_max = 240.0
+scale_amount_min = 2.0
+scale_amount_max = 5.0
+color = Color(1, 0.8, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+z_index = 50
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.5
+offset_top = -7.5
+offset_right = 17.5
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Rat +1"
+label_settings = SubResource("LabelSettings_4s5vq")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_kwuan")
+}
+autoplay = "new_animation"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_c42fa")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
